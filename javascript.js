@@ -89,10 +89,12 @@ function restart() {
     equalsFlag = false;
     operationFlag = false;
     number2Flag = false;
+    dividedByZeroFlag = false;
     number1 = 0;
     number2 = 0;
     operator = '';
-    display.textContent = number1;
+    displayValue = 0;
+    display.textContent = 0;
 }
 
 function ifDividedByZero() {//edit it.
