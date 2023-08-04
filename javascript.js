@@ -12,8 +12,8 @@ display.textContent = displayValue;
 dot.disabled = true;
 
 numbers.forEach(number => number.addEventListener('click', e => {
+    if(equalsFlag) restart();
     number2Flag = resetFlag(number2Flag);
-    equalsFlag = resetFlag(equalsFlag);
     dividedByZeroFlag = resetFlag(dividedByZeroFlag);
     if(displayValue === 0 || displayValue ==='0') display.textContent = '';
     if(displayValue === '0.') {
@@ -29,6 +29,7 @@ numbers.forEach(number => number.addEventListener('click', e => {
 }));
 
 symbols.forEach(symbol => symbol.addEventListener('click', e => {
+    equalsFlag = resetFlag(equalsFlag);
     if (operationFlag) {
         number1 = operate(number1, number2, operator);
         ifDividedByZero();
