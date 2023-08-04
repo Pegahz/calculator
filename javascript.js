@@ -15,9 +15,8 @@ numbers.forEach(number => number.addEventListener('click', e => {
     number2Flag = resetFlag(number2Flag);
     equalsFlag = resetFlag(equalsFlag);
     dividedByZeroFlag = resetFlag(dividedByZeroFlag);
-    if(displayValue == 0  ) display.textContent = '';
+    if(displayValue === 0 || displayValue ==='0') display.textContent = '';
     if(displayValue === '0.') {
-        number1 = displayValue;
         display.textContent = '0.';
     }
     displayValue = `${display.textContent}` + e.target.id;
@@ -70,6 +69,7 @@ dot.forEach(symbol => symbol.addEventListener('click', () => {
     if(equalsFlag) {
         displayValue = '0.';
         display.textContent = displayValue;
+        operationFlag = false;
         dot.disabled = false;
     }
 }));
