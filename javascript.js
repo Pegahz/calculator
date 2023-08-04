@@ -7,13 +7,19 @@ const numbers = document.querySelectorAll('.numbers');
 const symbols = document.querySelectorAll('.symbols');
 const equals = document.querySelectorAll('.equals');
 const clc = document.querySelectorAll('.clear');
+const dot = document.querySelectorAll('.dot');
 display.textContent = displayValue; 
+dot.disabled = true;
 
 numbers.forEach(number => number.addEventListener('click', e => {
-    number2Flag = checkFlag2Clear(number2Flag);
-    equalsFlag = checkFlag2Clear(equalsFlag);
-    dividedByZeroFlag = checkFlag2Clear(dividedByZeroFlag);
+    number2Flag = resetFlag(number2Flag);
+    equalsFlag = resetFlag(equalsFlag);
+    dividedByZeroFlag = resetFlag(dividedByZeroFlag);
     if(displayValue == 0  ) display.textContent = '';
+    if(displayValue === '0.') {
+        number1 = displayValue;
+        display.textContent = '0.';
+    }
     displayValue = `${display.textContent}` + e.target.id;
     display.textContent = displayValue;
     if (operationFlag) {
@@ -31,9 +37,11 @@ symbols.forEach(symbol => symbol.addEventListener('click', e => {
     operator = e.target.id;
     operationFlag = true;
     number2Flag = true;
+    dot.disabled = true;
 }));
 
 equals.forEach(symbol => symbol.addEventListener('click', e => {
+    dot.disabled = true;
     equalsFlag = true;
     operate(number1, number2, operator);
     if(dividedByZeroFlag) {
@@ -51,6 +59,19 @@ equals.forEach(symbol => symbol.addEventListener('click', e => {
 
 clc.forEach(symbol => symbol.addEventListener('click', e => {
     restart();
+}));
+
+dot.forEach(symbol => symbol.addEventListener('click', () => {
+    if(dot.disabled) {
+        displayValue = displayValue + '.';
+        display.textContent = displayValue;
+        dot.disabled = false;
+    }
+    if(equalsFlag) {
+        displayValue = '0.';
+        display.textContent = displayValue;
+        dot.disabled = false;
+    }
 }));
 
 function operate(number1, number2, operator) {
@@ -90,6 +111,7 @@ function restart() {
     operationFlag = false;
     number2Flag = false;
     dividedByZeroFlag = false;
+    dot.disabled = true;
     number1 = 0;
     number2 = 0;
     operator = '';
@@ -97,7 +119,7 @@ function restart() {
     display.textContent = 0;
 }
 
-function ifDividedByZero() {//edit it.
+function ifDividedByZero() {
     if(dividedByZeroFlag) {
             restart();
             displayValue = 'Divide by ZERO?';
@@ -109,7 +131,7 @@ function ifDividedByZero() {//edit it.
     }
 }
 
-function checkFlag2Clear(flag) {
+function resetFlag(flag) {
     if (flag) {
         display.textContent = '';
         return false;
