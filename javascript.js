@@ -69,20 +69,20 @@ function operate(number1, number2, operator) {
 }
 
 function add(a, b) {
-    return Number(a) + Number(b);
+    return parseFloat((Number(a) + Number(b)).toFixed(3));
 }
 
 function subtract(a, b) {
-    return Number(a) - Number(b);
+    return parseFloat((Number(a) - Number(b)).toFixed(3));
 }
 
 function multiply(a, b) {
-    return Number(a) * Number(b)
+    return parseFloat((Number(a) * Number(b)).toFixed(3));
 }
 
 function divide(a, b) {
     dividedByZeroFlag = (number2 == 0) ? true : false;
-    return Number(a) / Number(b);
+    return parseFloat((Number(a) / Number(b)).toFixed(3));
 }
 
 function restart() {
